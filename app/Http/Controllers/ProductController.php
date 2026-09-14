@@ -21,6 +21,8 @@ class ProductController extends Controller
     // }
 
 
+
+
     // public function dbPostData()
     // {
     //    $user =  DB::insert("insert into products (title, description, category, price, image, seller_name) values (?, ?, ?, ?, ?, ?)", [
@@ -78,7 +80,7 @@ class ProductController extends Controller
         }
 
         // Sort
-        match($request->sort) {
+        match ($request->sort) {
             'price_low_high' => $query->orderBy('price', 'asc'),
             'price_high_low' => $query->orderBy('price', 'desc'),
             'a_z'            => $query->orderBy('title', 'asc'),
@@ -86,7 +88,7 @@ class ProductController extends Controller
             default          => $query->latest(),
         };
 
-        $products = $query->get();
+        $products = $query->paginate(5);
 
         return view('products.index', [
             'products' => $products,

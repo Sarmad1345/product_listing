@@ -13,64 +13,63 @@
 
         {{-- Top Controls --}}
         <form method="GET" action="{{ route('products.index') }}">
-        <div class="mb-8 flex items-center justify-between gap-6">
+            <div class="mb-8 flex items-center justify-between gap-6">
 
-            {{-- Search --}}
-            <div class="relative w-[390px]">
+                {{-- Search --}}
+                <div class="relative w-[390px]">
 
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
-                    class="h-9 w-full rounded-sm border border-gray-200 bg-white px-3 pr-10 text-[11px] text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-gray-400">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search"
+                        class="h-9 w-full rounded-sm border border-gray-200 bg-white px-3 pr-10 text-[11px] text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-gray-400">
 
-                <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-4 w-4 text-gray-700">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.197 5.197a7.5 7.5 0 0 0 10.606 10.606Z" />
-                    </svg>
-                </button>
+                    <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-4 w-4 text-gray-700">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.197 5.197a7.5 7.5 0 0 0 10.606 10.606Z" />
+                        </svg>
+                    </button>
+
+                </div>
+
+
+                {{-- Right Controls --}}
+                <div class="flex items-center gap-3">
+
+                    <span class="text-[11px] font-medium text-gray-900">
+                        Sort by
+                    </span>
+
+
+                    {{-- Sort --}}
+                    <select name="sort" onchange="this.form.submit()"
+                        class="h-9 w-[148px] rounded-sm border border-gray-200 bg-white px-3 text-[11px] text-gray-700 outline-none focus:border-gray-400">
+
+                        <option value="latest" @selected(request('sort') == 'latest')>Latest</option>
+                        <option value="price_low_high" @selected(request('sort') == 'price_low_high')>Price: Low to High</option>
+                        <option value="price_high_low" @selected(request('sort') == 'price_high_low')>Price: High to Low</option>
+                        <option value="a_z" @selected(request('sort') == 'a_z')>A - Z</option>
+                        <option value="z_a" @selected(request('sort') == 'z_a')>Z - A</option>
+
+                    </select>
+
+
+                    {{-- Sell Item Button --}}
+                    <button type="button" onclick="openSellModal()"
+                        class="flex h-9 items-center gap-2 rounded-sm bg-lime-300 px-4 text-[11px] font-medium text-gray-900 transition hover:bg-lime-400">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+
+                        Sell item
+
+                    </button>
+
+                </div>
 
             </div>
-
-
-            {{-- Right Controls --}}
-            <div class="flex items-center gap-3">
-
-                <span class="text-[11px] font-medium text-gray-900">
-                    Sort by
-                </span>
-
-
-                {{-- Sort --}}
-                <select name="sort" onchange="this.form.submit()"
-                    class="h-9 w-[148px] rounded-sm border border-gray-200 bg-white px-3 text-[11px] text-gray-700 outline-none focus:border-gray-400">
-
-                    <option value="latest"         @selected(request('sort') == 'latest')>Latest</option>
-                    <option value="price_low_high" @selected(request('sort') == 'price_low_high')>Price: Low to High</option>
-                    <option value="price_high_low" @selected(request('sort') == 'price_high_low')>Price: High to Low</option>
-                    <option value="a_z"            @selected(request('sort') == 'a_z')>A - Z</option>
-                    <option value="z_a"            @selected(request('sort') == 'z_a')>Z - A</option>
-
-                </select>
-
-
-                {{-- Sell Item Button --}}
-                <button type="button" onclick="openSellModal()"
-                    class="flex h-9 items-center gap-2 rounded-sm bg-lime-300 px-4 text-[11px] font-medium text-gray-900 transition hover:bg-lime-400">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-4 w-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-
-                    Sell item
-
-                </button>
-
-            </div>
-
-        </div>
         </form>
-
 
         {{-- Products Grid --}}
         <div class="grid grid-cols-4 gap-x-5 gap-y-10">
@@ -92,10 +91,13 @@
         </div>
 
 
-
+        {{-- YAHAN PAR PAGINATION ADD KARNA HAI 👇 --}}
+        <div class="mt-10">
+            {{ $products->withQueryString()->links() }}
+        </div>
+        {{-- 👆 --}}
 
     </div>
-
 
     {{-- ========================================================= --}}
     {{-- SELL ITEM MODAL --}}
@@ -287,6 +289,7 @@
                     @enderror
 
                 </div>
+
 
 
                 {{-- Seller Name --}}

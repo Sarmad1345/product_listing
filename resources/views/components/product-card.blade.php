@@ -30,16 +30,18 @@
 
         <div class="mt-1.5 flex items-center gap-2">
             <div class="h-4 w-4 overflow-hidden rounded-full bg-gray-200">
-                <img
-                    src="{{ $product->seller_avatar ? Storage::url($product->seller_avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($product->seller_name) . '&size=40&background=d9f99d&color=374151' }}"
-                    alt="{{ $product->seller_name }}"
-                    class="h-full w-full object-cover">
+                <img src="{{ $product->seller_avatar ? Storage::url($product->seller_avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($product->seller_name) . '&size=40&background=d9f99d&color=374151' }}"
+                    alt="{{ $product->seller_name }}" class="h-full w-full object-cover">
             </div>
 
             <span class="text-[10px] text-gray-700">
                 {{ $product->seller_name }}
             </span>
+
         </div>
+
     </div>
+
+
 
 </div>

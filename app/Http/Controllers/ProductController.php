@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Models\Seller;
 
 class ProductController extends Controller
 {
@@ -156,5 +157,11 @@ class ProductController extends Controller
         return redirect()
             ->route('products.index')
             ->with('success', 'Item uploaded successfully.');
+    }
+
+
+    function getData()
+    {
+        return Seller::find(2);
     }
 }

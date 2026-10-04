@@ -91,11 +91,9 @@
         </div>
 
 
-        {{-- YAHAN PAR PAGINATION ADD KARNA HAI 👇 --}}
         <div class="mt-10">
             {{ $products->withQueryString()->links() }}
         </div>
-        {{-- 👆 --}}
 
     </div>
 
